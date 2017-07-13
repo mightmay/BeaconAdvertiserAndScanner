@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:baselineAligned="false">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send an AltBeacon every 100msec for 20 times"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+
+        <Button
+            android:id="@+id/advertToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/textView1"
+            android:text="Start Advertising" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AD LENGTH:"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/adlengthbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="0x1B" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AD TYPE:"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/adtypebox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="0xFF" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MFG ID:"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/mfgidbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="0x051F" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BEACON CODE:"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/beaconcodebox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="0xBEAC" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BEACON ID (16 Byte: LUNERASMARTLIGHT):"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/beaconid1box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="4c554e455241534d4152544c49474854" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BEACON ID (1 Byte Beacons Type):"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/beaconid2box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="0x02" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BEACON ID (3 Byte Beacons Type Specific Data):"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/beaconid3box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="0x000000" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="REFERENCE RSSI:"
+            android:textColor="#ff000000"
+
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/referencerssibox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="1dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="00" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="MFG RESERVED:"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/mfgreservedbox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="1dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="00" />
+
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
