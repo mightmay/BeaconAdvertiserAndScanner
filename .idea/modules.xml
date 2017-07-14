@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Beacon Advertiser and Scanner.iml" filepath="$PROJECT_DIR$/Beacon Advertiser and Scanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BeaconAdvertiserAndScanner.iml" filepath="$PROJECT_DIR$/BeaconAdvertiserAndScanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

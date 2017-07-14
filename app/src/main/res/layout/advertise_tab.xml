@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send an AltBeacon every 100msec for 20 times"
+            android:text="Send advertisement data below using hexadecimal (No spaces)"
             android:textColor="#ff000000"
             android:textSize="10sp" />
 
@@ -37,10 +37,30 @@
             android:text="Start Advertising" />
 
         <TextView
+            android:id="@+id/textView0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Byte 0 to 2:"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/byte0to2box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="3dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="020106" />
+
+        <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AD LENGTH:"
+            android:text="Byte 3 (AD LENGTH):"
             android:textColor="#ff000000"
             android:textSize="10sp" />
 
@@ -54,13 +74,13 @@
             android:ems="10"
             android:inputType="text"
             android:textSize="12sp"
-            android:text="0x1B" />
+            android:text="1B" />
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AD TYPE:"
+            android:text="Byte 4 (AD TYPE):"
             android:textColor="#ff000000"
             android:textSize="10sp" />
 
@@ -74,12 +94,12 @@
             android:ems="10"
             android:inputType="text"
             android:textSize="12sp"
-            android:text="0xFF" />
+            android:text="FF" />
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MFG ID:"
+            android:text="Byte 5 to 6 (MFG ID):"
             android:textColor="#ff000000"
             android:textSize="10sp" />
 
@@ -93,13 +113,13 @@
             android:ems="10"
             android:inputType="text"
             android:textSize="12sp"
-            android:text="0x051F" />
+            android:text="051F" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BEACON CODE:"
+            android:text="Byte 7 to 8 (BEACON CODE):"
             android:textColor="#ff000000"
             android:textSize="10sp" />
 
@@ -113,13 +133,13 @@
             android:ems="10"
             android:inputType="text"
             android:textSize="12sp"
-            android:text="0xBEAC" />
+            android:text="BEAC" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BEACON ID (16 Byte: LUNERASMARTLIGHT):"
+            android:text="Byte 9 to 24 (16 Byte BEACON ID):"
             android:textColor="#ff000000"
             android:textSize="10sp" />
 
@@ -139,7 +159,7 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BEACON ID (1 Byte Beacons Type):"
+            android:text="Byte 25 (BEACON ID, 1 Byte Beacons Type):"
             android:textColor="#ff000000"
             android:textSize="10sp" />
 
@@ -153,13 +173,13 @@
             android:ems="10"
             android:inputType="text"
             android:textSize="12sp"
-            android:text="0x02" />
+            android:text="02" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BEACON ID (3 Byte Beacons Type Specific Data):"
+            android:text="Byte 26 to 28 (BEACON ID 3, Byte Beacons Type Specific Data):"
             android:textColor="#ff000000"
             android:textSize="10sp" />
 
@@ -173,12 +193,12 @@
             android:ems="10"
             android:inputType="text"
             android:textSize="12sp"
-            android:text="0x000000" />
+            android:text="000000" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="REFERENCE RSSI:"
+            android:text="Byte 29 (REFERENCE RSSI):"
             android:textColor="#ff000000"
 
             android:textSize="10sp" />
@@ -198,7 +218,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="MFG RESERVED:"
+            android:text="Byte 30 (MFG RESERVED):"
             android:textColor="#ff000000"
             android:textSize="10sp" />
 

@@ -14,12 +14,38 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.bluetooth.*;
+import android.bluetooth.le.AdvertiseCallback;
+import android.bluetooth.le.AdvertiseData;
+import android.bluetooth.le.AdvertiseSettings;
+import android.bluetooth.le.BluetoothLeAdvertiser;
+import android.content.Context;
+import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.BeaconTransmitter;
+import org.altbeacon.beacon.Identifier;
+import java.util.ArrayList;
+import java.util.Arrays;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.BeaconTransmitter;
 
 import java.util.Arrays;
+
 
 public class BeaconAdvertiseView extends Fragment implements BeaconAdvertiserCallback {
 
@@ -42,7 +68,7 @@ public class BeaconAdvertiseView extends Fragment implements BeaconAdvertiserCal
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.advertise_tab, container, false);
-
+        final EditText byte0to2Text = (EditText) v.findViewById(R.id.byte0to2box);
         final EditText adLengthText = (EditText) v.findViewById(R.id.adlengthbox);
         final EditText adTypeText = (EditText) v.findViewById(R.id.adtypebox);
         final EditText MFGIDText = (EditText) v.findViewById(R.id.mfgidbox);
@@ -54,7 +80,6 @@ public class BeaconAdvertiseView extends Fragment implements BeaconAdvertiserCal
         final EditText MGFReservedText = (EditText) v.findViewById(R.id.mfgreservedbox);
 
 
-
         final Button toggleButton = (Button) v.findViewById(R.id.advertToggle);
         toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +88,9 @@ public class BeaconAdvertiseView extends Fragment implements BeaconAdvertiserCal
 
                     debugData(" Starting Advertising");
 
-                    StartAdvertiser(adLengthText.getText().toString(),
+                    StartAdvertiser(
+                            byte0to2Text.getText().toString(),
+                            adLengthText.getText().toString(),
                             adTypeText.getText().toString(),
                             MFGIDText.getText().toString(),
                             beaconCodeText.getText().toString(),
@@ -79,16 +106,17 @@ public class BeaconAdvertiseView extends Fragment implements BeaconAdvertiserCal
         return v;
     }
 
-    private void StartAdvertiser(String adLength,String adType,String MFGID,
+    private void StartAdvertiser(String byte0to2, String adLength,String adType,String MFGID,
                                  String beaconCode,String beaconID1, String beaconID2,
                                  String beaconID3, String ReferenceRSSI,String MGFReserved)
     {
 
         //API is not available before Lollipop
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            String DataInString = byte0to2+adLength+adType+MFGID+beaconCode+beaconID1+beaconID2+beaconID3+ReferenceRSSI+MGFReserved;
+            byte[] serviceData =  hexStringToByteArray( DataInString) ;
 
-
-           Start(adLength, adType, MFGID,beaconCode, beaconID1,beaconID2,beaconID3, ReferenceRSSI, MGFReserved);
+           Start(serviceData);
 
 
         }else{
@@ -118,9 +146,7 @@ public class BeaconAdvertiseView extends Fragment implements BeaconAdvertiserCal
 
 
 
-    public void Start(String adLength,String adType,String MFGID,
-                         String beaconCode,String beaconID1,String beaconID2,String beaconID3,String ReferenceRSSI,String MGFReserved){
-
+    public void Start(byte[] serviceData){
 /// L-BEACON Fields
         /// Byte(s)     Name
         /// --------------------------
@@ -133,7 +159,39 @@ public class BeaconAdvertiseView extends Fragment implements BeaconAdvertiserCal
         /// 29          reference rssi
         /// 30          Reserved for use by the manufacturer to implement special features (optional)
         ///
-       // long presetbyte0to2 = 0x020106;
+
+
+
+
+        BluetoothLeAdvertiser advertiser = BluetoothAdapter.getDefaultAdapter().getBluetoothLeAdvertiser();
+        AdvertiseSettings settings = new AdvertiseSettings.Builder()
+                .setAdvertiseMode( AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY )
+                .setTxPowerLevel( AdvertiseSettings.ADVERTISE_TX_POWER_HIGH )
+                .setConnectable( false )
+                .build();
+
+        AdvertiseData data = new AdvertiseData.Builder()
+                .setIncludeDeviceName( true )
+
+                .addServiceData( null, serviceData )
+                .build();
+
+
+        AdvertiseCallback advertisingCallback = new AdvertiseCallback() {
+            @Override
+            public void onStartSuccess(AdvertiseSettings settingsInEffect) {
+                super.onStartSuccess(settingsInEffect);
+            }
+
+            @Override
+            public void onStartFailure(int errorCode) {
+                Log.e( "BLE", "Advertising onStartFailure: " + errorCode );
+                super.onStartFailure(errorCode);
+            }
+        };
+
+        advertiser.startAdvertising( settings, data, advertisingCallback );
+        /*
         Beacon beacon = new Beacon.Builder()
                 .setManufacturer(Integer.decode(MFGID))
 
@@ -171,11 +229,20 @@ public class BeaconAdvertiseView extends Fragment implements BeaconAdvertiserCal
 
 
             beaconTransmitter.stopAdvertising();
-
+*/
 
 
     }
 
+    public static byte[] hexStringToByteArray(String s) {
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+                    + Character.digit(s.charAt(i+1), 16));
+        }
+        return data;
+    }
 }
 
 

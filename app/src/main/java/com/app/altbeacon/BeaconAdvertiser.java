@@ -26,8 +26,6 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-@TargetApi(18)
-@SuppressLint("NewApi")
 
 public class BeaconAdvertiser {
 
